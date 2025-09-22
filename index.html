@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نظام الاختبارات - ميتسوبيشي</title>
+<style>
+body {
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  background: #140505;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.container {
+  width: 80%;
+  max-width: 600px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 2;
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-top: 180px;
+}
+h1, h2 {
+  text-align: center;
+  color: #B3000F;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: linear-gradient(145deg, #9e020f, #460107);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+button:hover {
+  background: linear-gradient(145deg, #7A000B, #4D0006);
+  transform: translateY(-6px);
+  box-shadow: 0 4px 8px rgba(179,0,15,0.4);
+}
+.back-btn {
+  background: linear-gradient(145deg, #555, #272727);
+}
+.back-btn:hover {
+  background: linear-gradient(145deg, #333, #111);
+}
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+iframe {
+  width: 100%;
+  height: 60vh;
+  border: none;
+  border-radius: 8px;
+}
+
+/* 🔹 أزرار اختيار اللغة */
+.lang-switch {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+.lang-switch button {
+  width: auto;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 2px;
+  font-size: 0.9rem;
+  background: #333;
+  border-radius: 6px;
+}
+.lang-switch button:hover {
+  background: #111;
+}
+
+/* المكعب */
+.animation-container {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  perspective: 900px;
+  z-index: 1;
+}
+.cube {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  transform-style: preserve-3d;
+  animation: cubeRotate 11s infinite linear;
+}
+.cube-face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(37, 4, 7, 0.85);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 2px solid #fff;
+  text-align: center;
+}
+.front  { transform: rotateY(0deg) translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.top    { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+@keyframes cubeRotate {
+  from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  to   { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+.mitsu {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin-top: 8px;
+}
+.rhombus {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  border: 15px solid transparent;
+  border-bottom: 30px solid #e60012;
+  transform-origin: center;
+}
+.rhombus:after {
+  content: "";
+  position: absolute;
+  left: -15px;
+  top: 30px;
+  width: 0; height: 0;
+  border: 15px solid transparent;
+  border-top: 30px solid #e60012;
+}
+.top-rhombus    { transform: translate(-50%, -50%) rotate(0deg); }
+.left-rhombus   { transform: translate(-50%, -50%) rotate(-120deg); }
+.right-rhombus  { transform: translate(-50%, -50%) rotate(120deg); }
+.fuso-text {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-top: 8px;
+  letter-spacing: 2px;
+  color: white;
+  background: #e60012;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* ⚡ تصميم خاص للجوال */
+@media (max-width: 600px) {
+  h1, h2 { font-size: 1.1rem; }
+
+  .container {
+    width: 90%;
+    max-width: 420px;
+    margin-top: 180px;
+
+    height: auto;        /* يكبر حسب المحتوى */
+    min-height: 180px;   /* حد أدنى */
+    
+    /* شلنا max-height */
+    /* شلنا overflow-y */
+  }
+
+  .animation-container { top: 18%; }
+
+  .cube { width: 140px; height: 140px; }
+  .cube-face { width: 140px; height: 140px; font-size: 0.9rem; }
+  .front  { transform: rotateY(0deg) translateZ(70px); }
+  .back   { transform: rotateY(180deg) translateZ(70px); }
+  .right  { transform: rotateY(90deg) translateZ(70px); }
+  .left   { transform: rotateY(-90deg) translateZ(70px); }
+  .top    { transform: rotateX(90deg) translateZ(70px); }
+  .bottom { transform: rotateX(-90deg) translateZ(70px); }
+
+  .mitsu { width: 50px; height: 50px; }
+  .rhombus { border: 14px solid transparent; border-bottom: 28px solid #e60012; }
+  .rhombus:after { left: -14px; top: 28px; border: 14px solid transparent; border-top: 28px solid #e60012; }
+
+  .fuso-text { font-size: 1.1rem; padding: 4px 8px; }
+}
+
+/* ⚡ تصميم خاص للكمبيوتر واللابتوب */
+@media (min-width: 1025px) {
+  .container { width: 70%; max-width: 1000px; margin-top: 100px; max-height: 60vh; }
+  .cube { width: 200px; height: 200px; }
+  .cube-face { font-size: 1.4rem; }
+  .fuso-text { font-size: 2rem; padding: 6px 12px; }
+
+  /* 👉 تكبير أزرار اللغة في الكمبيوتر */
+  .lang-switch button {
+    font-size: 1.2rem;
+    padding: 8px 18px;
+    margin: 4px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Language switch -->
+<div class="lang-switch">
+  <button onclick="setLanguage('ar')">العربية</button>
+  <button onclick="setLanguage('en')">English</button>
+</div>
+
+<!-- Spinning cube -->
+<div class="animation-container">
+  <div class="cube">
+    <div class="cube-face front">Determination<div class="mitsu"><div class="rhombus top-rhombus"></div><div class="rhombus left-rhombus"></div><div class="rhombus right-rhombus"></div></div></div>
+    <div class="cube-face back">Hard Work<div class="fuso-text">FUSO</div></div>
+    <div class="cube-face right">Creativity<div class="mitsu"><div class="rhombus top-rhombus"></div><div class="rhombus left-rhombus"></div><div class="rhombus right-rhombus"></div></div></div>
+    <div class="cube-face left">Growth<div class="fuso-text">FUSO</div></div>
+    <div class="cube-face top">Success<div class="mitsu"><div class="rhombus top-rhombus"></div><div class="rhombus left-rhombus"></div><div class="rhombus right-rhombus"></div></div></div>
+    <div class="cube-face bottom">Excellence<div class="fuso-text">FUSO</div></div>
+  </div>
+</div>
+
+<div class="container" id="app"></div>
+
+<script>
+var lang = localStorage.getItem('quizLang') || 'ar'; 
+var selectedQuiz = null;
+var inTestPage = false; 
+
+function setLanguage(selectedLang) {
+    lang = selectedLang;
+    localStorage.setItem('quizLang', lang);
+    showQuizTypeSelection();
+}
+function showQuizTypeSelection() {
+    selectedQuiz = null; 
+    var title = lang === 'ar' ? "اختر نوع الدورة" : "Choose Course Type";
+    document.getElementById('app').innerHTML =
+        '<h2>' + title + '</h2>' +
+        '<button onclick="selectedQuiz=\'serviceadvisor\';showCourseOptions()">🛎 ' + (lang === 'ar' ? 'مستشار الصيانة' : 'Service Advisor') + '</button>' +
+        '<button onclick="selectedQuiz=\'salesmarketing\';showCourseOptions()">💼 ' + (lang === 'ar' ? 'المبيعات والتسويق' : 'Sales & Marketing') + '</button>';
+}
+function showCourseOptions() {
+    var title = lang === 'ar' ? "محتويات الدورة" : "Course Contents";
+    document.getElementById('app').innerHTML =
+        '<h2>' + title + '</h2>' +
+        '<button onclick="showVideos()">🎬 ' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</button>' +
+        '<button onclick="showGame()">🎮 ' + (lang === 'ar' ? 'لعبة تدريبية' : 'Training Game') + '</button>' +
+        '<button onclick="showContent()">📘 ' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</button>' +
+        '<button onclick="showPasswordInput()">📝 ' + (lang === 'ar' ? 'الاختبار' : 'Quiz') + '</button>' +
+        '<button onclick="showEvaluation()">⭐ ' + (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + '</button>' +
+        '<button class="back-btn" onclick="showQuizTypeSelection()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+function showVideos(){
+    var content = "";
+    if (selectedQuiz === "serviceadvisor") {
+        content =
+          '<h2>'+(lang==='ar'?'المقاطع التعليمية':'Video Lessons')+'</h2>'+
+          '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;">'+
+          '<iframe src="https://www.youtube.com/embed/8Ir28uISz7E" frameborder="0" allowfullscreen '+
+          'style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>'+
+          '</div>'+
+          '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+    } else {
+        content =
+          '<h2>'+(lang==='ar'?'المقاطع التعليمية':'Video Lessons')+'</h2>'+
+          '<p>'+(lang==='ar'?'سيتم إدراج الفيديوهات هنا.':'Videos will be shown here.')+'</p>'+
+          '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+    }
+    document.getElementById('app').innerHTML = content;
+}
+function showGame(){
+    document.getElementById('app').innerHTML =
+      '<h2>'+(lang==='ar'?'اللعبة التدريبية':'Training Game')+'</h2>'+
+      '<p>'+(lang==='ar'?'محاكاة تفاعلية لتجربة المهام.':'Interactive simulation game.')+'</p>'+
+      '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+}
+function showContent(){
+    document.getElementById('app').innerHTML =
+      '<h2>'+(lang==='ar'?'المادة التدريبية':'Course Material')+'</h2>'+
+      '<p>'+(lang==='ar'?'سيتم إدراج ملفات ومواد الدورة هنا.':'Training material goes here.')+'</p>'+
+      '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+}
+function showPasswordInput() {
+    var correctPassword = "1234"; 
+    document.getElementById('app').innerHTML =
+        '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور' : 'Enter Password') + '</h2>' +
+        '<input type="password" id="passwordInput" placeholder="' + (lang === 'ar' ? 'كلمة المرور' : 'Password') + '" />' +
+        '<button onclick="checkPassword(\'' + correctPassword + '\')">' + (lang === 'ar' ? 'تأكيد' : 'Confirm') + '</button>' +
+        '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+function checkPassword(correctPassword) {
+    var enteredPassword = document.getElementById('passwordInput').value;
+    if (enteredPassword === correctPassword) {
+        inTestPage = true; 
+        showGoogleForm();
+    } else {
+        alert(lang === 'ar' ? 'كلمة مرور خاطئة! حاول مرة أخرى.' : 'Incorrect password! Try again.');
+    }
+}
+function showGoogleForm() {
+    var formURL = "";
+    var evaluationURL = "https://forms.gle/SoroUemofhoK96uP6"; 
+    if (selectedQuiz === "serviceadvisor") {
+        formURL = "https://docs.google.com/forms/d/1LmLC9OI1-2PCdKQDypQqih0yROCu94_zyO3axObHZ90/viewform?embedded=true"; 
+    } else if (selectedQuiz === "salesmarketing") {
+        formURL = "https://forms.gle/SoroUemofhoK96uP6"; 
+    }
+    document.getElementById('app').innerHTML =
+        '<h2>' + (lang === 'ar' ? 'نموذج الاختبار' : 'Quiz Form') + '</h2>' +
+        '<iframe src="' + formURL + '"></iframe>' +
+        '<button onclick="showEvaluation()">' + (lang === 'ar' ? '⭐ تقييم الدورة' : '⭐ Course Evaluation') + '</button>' +
+        '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+function showEvaluation(){
+    var evaluationURL = "https://forms.gle/SoroUemofhoK96uP6";
+    document.getElementById('app').innerHTML =
+      '<h2>'+(lang==='ar'?'تقييم الدورة':'Course Evaluation')+'</h2>'+
+      '<iframe src="'+evaluationURL+'"></iframe>'+
+      '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+}
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden' && inTestPage) {
+        alert(lang === 'ar' ? 'لقد غادرت صفحة الاختبار. سيتم إعادتك إلى الصفحة الأولى.' : 'You have left the quiz page. You will be redirected to the first page.');
+        showQuizTypeSelection(); 
+        inTestPage = false; 
+    }
+});
+showQuizTypeSelection();
+</script>
+</body>
+</html>

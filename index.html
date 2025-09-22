@@ -279,16 +279,18 @@ function showVideos(){
     if (selectedQuiz === "serviceadvisor") {
         content =
           '<h2>'+(lang==='ar'?'المقاطع التعليمية':'Video Lessons')+'</h2>'+
-          '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;">'+
-          '<iframe src="https://www.youtube.com/embed/8Ir28uISz7E" frameborder="0" allowfullscreen '+
-          'style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>'+
-          '</div>'+
-          '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+          '<video controls width="100%" style="border-radius:8px;max-height:60vh;">'+
+          '<source src="videos/Test.mp4" type="video/mp4">'+
+          (lang==='ar'?'متصفحك لا يدعم تشغيل الفيديو.':'Your browser does not support video playback.')+
+          '</video>'+
+          '<button class="back-btn" onclick="showCourseOptions()">'+
+          (lang==='ar'?'رجوع':'Back')+'</button>';
     } else {
         content =
           '<h2>'+(lang==='ar'?'المقاطع التعليمية':'Video Lessons')+'</h2>'+
           '<p>'+(lang==='ar'?'سيتم إدراج الفيديوهات هنا.':'Videos will be shown here.')+'</p>'+
-          '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+          '<button class="back-btn" onclick="showCourseOptions()">'+
+          (lang==='ar'?'رجوع':'Back')+'</button>';
     }
     document.getElementById('app').innerHTML = content;
 }

@@ -140,7 +140,7 @@ iframe {
   position: relative;
   width: 60px;
   height: 60px;
-  margin-top: 8px;
+  transform: rotate(180deg) translateY(-20px); /* -20px يرفع الشعار لفوق */
 }
 .rhombus {
   position: absolute;
@@ -275,24 +275,17 @@ function showCourseOptions() {
         '<button class="back-btn" onclick="showQuizTypeSelection()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 function showVideos(){
-    var content = "";
     if (selectedQuiz === "serviceadvisor") {
-        content =
-          '<h2>'+(lang==='ar'?'المقاطع التعليمية':'Video Lessons')+'</h2>'+
-          '<video controls width="100%" style="border-radius:8px;max-height:60vh;">'+
-          '<source src="Test.mp4" type="video/mp4">'+
-          (lang==='ar'?'متصفحك لا يدعم تشغيل الفيديو.':'Your browser does not support video playback.')+
-          '</video>'+
-          '<button class="back-btn" onclick="showCourseOptions()">'+
-          (lang==='ar'?'رجوع':'Back')+'</button>';
+        // عند الضغط على زر المقاطع التعليمية لمستشار الصيانة، سيتم فتح رابط جديد
+        window.open("https://360.articulate.com/review/content/99038e9a-83f7-44f0-a54b-d734bd6488e7/review", "_blank");
     } else {
-        content =
+        // للمبيعات والتسويق
+        document.getElementById('app').innerHTML =
           '<h2>'+(lang==='ar'?'المقاطع التعليمية':'Video Lessons')+'</h2>'+
           '<p>'+(lang==='ar'?'سيتم إدراج الفيديوهات هنا.':'Videos will be shown here.')+'</p>'+
           '<button class="back-btn" onclick="showCourseOptions()">'+
           (lang==='ar'?'رجوع':'Back')+'</button>';
     }
-    document.getElementById('app').innerHTML = content;
 }
 function showGame(){
     document.getElementById('app').innerHTML =

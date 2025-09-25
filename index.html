@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نظام الاختبارات - ميتسوبيشي</title>
 <style>
+/* 🌍 الأساسيات */
 body {
   font-family: "Segoe UI", Tahoma, Arial, sans-serif;
   background: #140505;
@@ -15,6 +16,8 @@ body {
   align-items: center;
   min-height: 100vh;
 }
+
+/* 📦 الصندوق الرئيسي */
 .container {
   width: 80%;
   max-width: 600px;
@@ -28,12 +31,16 @@ body {
   overflow-y: auto;
   margin-top: 180px;
 }
+
+/* 📝 العناوين */
 h1, h2 {
   text-align: center;
   color: #B3000F;
   margin-bottom: 20px;
   font-size: 1.5rem;
 }
+
+/* 🔘 الأزرار */
 button {
   display: block;
   width: 100%;
@@ -53,12 +60,16 @@ button:hover {
   transform: translateY(-6px);
   box-shadow: 0 4px 8px rgba(179,0,15,0.4);
 }
+
+/* ⬅ زر الرجوع */
 .back-btn {
   background: linear-gradient(145deg, #555, #272727);
 }
 .back-btn:hover {
   background: linear-gradient(145deg, #333, #111);
 }
+
+/* 🔑 حقل الإدخال */
 input[type="password"] {
   width: 100%;
   padding: 10px;
@@ -68,6 +79,8 @@ input[type="password"] {
   font-size: 14px;
   box-sizing: border-box;
 }
+
+/* 📑 iframe */
 iframe {
   width: 100%;
   height: 60vh;
@@ -75,7 +88,7 @@ iframe {
   border-radius: 8px;
 }
 
-/* 🔹 أزرار اختيار اللغة */
+/* 🌐 أزرار اختيار اللغة */
 .lang-switch {
   position: absolute;
   top: 20px;
@@ -95,7 +108,17 @@ iframe {
   background: #111;
 }
 
-/* المكعب */
+/* 🔺 الشعار أعلى يمين */
+.top-right-logo {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 130px;   /* للجوال افتراضياً */
+  height: auto;
+  z-index: 1100;
+}
+
+/* 🎲 المكعب */
 .animation-container {
   position: absolute;
   top: 15%;
@@ -132,20 +155,25 @@ iframe {
 .left   { transform: rotateY(-90deg) translateZ(100px); }
 .top    { transform: rotateX(90deg) translateZ(100px); }
 .bottom { transform: rotateX(-90deg) translateZ(100px); }
+
 @keyframes cubeRotate {
   from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
   to   { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
 }
+
+/* 🔻 شعار ميتسوبيشي */
 .mitsu {
   position: relative;
   width: 60px;
   height: 60px;
-  transform: rotate(180deg) translateY(-20px); /* -20px يرفع الشعار لفوق */
+  transform: rotate(180deg) translateY(-20px);
 }
 .rhombus {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 0; height: 0;
+  top: 50%; 
+  left: 50%;
+  width: 0; 
+  height: 0;
   border: 15px solid transparent;
   border-bottom: 30px solid #e60012;
   transform-origin: center;
@@ -155,13 +183,15 @@ iframe {
   position: absolute;
   left: -15px;
   top: 30px;
-  width: 0; height: 0;
+  width: 0; 
+  height: 0;
   border: 15px solid transparent;
   border-top: 30px solid #e60012;
 }
 .top-rhombus    { transform: translate(-50%, -50%) rotate(0deg); }
 .left-rhombus   { transform: translate(-50%, -50%) rotate(-120deg); }
 .right-rhombus  { transform: translate(-50%, -50%) rotate(120deg); }
+
 .fuso-text {
   font-size: 1.6rem;
   font-weight: 900;
@@ -173,7 +203,7 @@ iframe {
   border-radius: 4px;
 }
 
-/* ⚡ تصميم خاص للجوال */
+/* 📱 تصميم خاص للجوال */
 @media (max-width: 600px) {
   h1, h2 { font-size: 1.1rem; }
 
@@ -181,15 +211,11 @@ iframe {
     width: 90%;
     max-width: 420px;
     margin-top: 180px;
-
-    height: auto;        /* يكبر حسب المحتوى */
-    min-height: 180px;   /* حد أدنى */
-    
-    /* شلنا max-height */
-    /* شلنا overflow-y */
+    height: auto;
+    min-height: 180px;
   }
 
-  .animation-container { top: 18%; }
+  .animation-container { top: 22%; }
 
   .cube { width: 140px; height: 140px; }
   .cube-face { width: 140px; height: 140px; font-size: 0.9rem; }
@@ -207,14 +233,25 @@ iframe {
   .fuso-text { font-size: 1.1rem; padding: 4px 8px; }
 }
 
-/* ⚡ تصميم خاص للكمبيوتر واللابتوب */
+/* 💻 تصميم خاص للكمبيوتر */
 @media (min-width: 1025px) {
-  .container { width: 70%; max-width: 1000px; margin-top: 100px; max-height: 60vh; }
+  .container { 
+    width: 70%; 
+    max-width: 1000px; 
+    margin-top: 100px; 
+    max-height: 60vh; 
+  }
+
   .cube { width: 200px; height: 200px; }
   .cube-face { font-size: 1.4rem; }
   .fuso-text { font-size: 2rem; padding: 6px 12px; }
 
-  /* 👉 تكبير أزرار اللغة في الكمبيوتر */
+  /* 👆 تكبير شعار الكمبيوتر */
+  .top-right-logo {
+    width: 250px;
+  }
+
+  /* 👉 تكبير أزرار اللغة */
   .lang-switch button {
     font-size: 1.2rem;
     padding: 8px 18px;
@@ -224,7 +261,8 @@ iframe {
 </style>
 </head>
 <body>
-
+<!-- شعار في أعلى يمين الشاشة -->
+<img src="Picture1.png" alt="شعاري" class="top-right-logo">
 <!-- Language switch -->
 <div class="lang-switch">
   <button onclick="setLanguage('ar')">العربية</button>
@@ -244,6 +282,7 @@ iframe {
 </div>
 
 <div class="container" id="app"></div>
+
 
 <script>
 var lang = localStorage.getItem('quizLang') || 'ar'; 

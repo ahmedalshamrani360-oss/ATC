@@ -333,12 +333,24 @@ function showGame(){
       '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
 }
 function showContent(){
-    document.getElementById('app').innerHTML =
-      '<h2>'+(lang==='ar'?'المادة التدريبية':'Course Material')+'</h2>'+
-      '<p>'+(lang==='ar'?'سيتم إدراج ملفات ومواد الدورة هنا.':'Training material goes here.')+'</p>'+
-      '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+    if (selectedQuiz === "serviceadvisor") {
+        // فقط ملف Google Drive المطلوب
+        var driveFileURL = "https://drive.google.com/file/d/1tLQpt1oEOnqD5vud0crBGXcljX4HMX94/view?usp=sharing";
+
+        document.getElementById('app').innerHTML =
+          '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
+          '<p>' + (lang === 'ar' ? 'اضغط على الزر أدناه لعرض الملف:' : 'Click the button below to open the file:') + '</p>' +
+          '<button onclick="window.open(\'' + driveFileURL + '\', \'_blank\')">📄 Customer Delight</button>' +
+          '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+    } else {
+        // للمبيعات والتسويق
+        document.getElementById('app').innerHTML =
+          '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
+          '<p>' + (lang === 'ar' ? 'سيتم إدراج ملفات ومواد الدورة هنا.' : 'Training materials will be added here.') + '</p>' +
+          '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+    }
 }
-function showPasswordInput() {
+function showPasswordInput() {  
     var correctPassword = "1234"; 
     document.getElementById('app').innerHTML =
         '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور' : 'Enter Password') + '</h2>' +

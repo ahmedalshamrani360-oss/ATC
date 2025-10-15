@@ -27,7 +27,7 @@ body {
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   position: relative;
   z-index: 2;
-  max-height: 60vh;
+  max-height: 80vh;
   overflow-y: auto;
   margin-top: 180px;
 }
@@ -113,7 +113,7 @@ iframe {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 130px;   /* للجوال افتراضياً */
+  width: 130px;
   height: auto;
   z-index: 1100;
 }
@@ -239,19 +239,15 @@ iframe {
     width: 70%; 
     max-width: 1000px; 
     margin-top: 100px; 
-    max-height: 60vh; 
+    max-height: 80vh; 
   }
 
   .cube { width: 200px; height: 200px; }
   .cube-face { font-size: 1.4rem; }
   .fuso-text { font-size: 2rem; padding: 6px 12px; }
 
-  /* 👆 تكبير شعار الكمبيوتر */
-  .top-right-logo {
-    width: 250px;
-  }
+  .top-right-logo { width: 250px; }
 
-  /* 👉 تكبير أزرار اللغة */
   .lang-switch button {
     font-size: 1.2rem;
     padding: 8px 18px;
@@ -261,15 +257,13 @@ iframe {
 </style>
 </head>
 <body>
-<!-- شعار في أعلى يمين الشاشة -->
 <img src="Picture1.png" alt="شعاري" class="top-right-logo">
-<!-- Language switch -->
+
 <div class="lang-switch">
   <button onclick="setLanguage('ar')">العربية</button>
   <button onclick="setLanguage('en')">English</button>
 </div>
 
-<!-- Spinning cube -->
 <div class="animation-container">
   <div class="cube">
     <div class="cube-face front">Determination<div class="mitsu"><div class="rhombus top-rhombus"></div><div class="rhombus left-rhombus"></div><div class="rhombus right-rhombus"></div></div></div>
@@ -283,7 +277,6 @@ iframe {
 
 <div class="container" id="app"></div>
 
-
 <script>
 var lang = localStorage.getItem('quizLang') || 'ar'; 
 var selectedQuiz = null;
@@ -294,15 +287,19 @@ function setLanguage(selectedLang) {
     localStorage.setItem('quizLang', lang);
     showQuizTypeSelection();
 }
+
 function showQuizTypeSelection() {
     selectedQuiz = null; 
+    inTestPage = false;
     var title = lang === 'ar' ? "اختر نوع الدورة" : "Choose Course Type";
     document.getElementById('app').innerHTML =
         '<h2>' + title + '</h2>' +
         '<button onclick="selectedQuiz=\'serviceadvisor\';showCourseOptions()">🛎 ' + (lang === 'ar' ? 'مستشار الصيانة' : 'Service Advisor') + '</button>' +
         '<button onclick="selectedQuiz=\'salesmarketing\';showCourseOptions()">💼 ' + (lang === 'ar' ? 'المبيعات والتسويق' : 'Sales & Marketing') + '</button>';
 }
+
 function showCourseOptions() {
+    inTestPage = false;
     var title = lang === 'ar' ? "محتويات الدورة" : "Course Contents";
     document.getElementById('app').innerHTML =
         '<h2>' + title + '</h2>' +
@@ -313,51 +310,57 @@ function showCourseOptions() {
         '<button onclick="showEvaluation()">⭐ ' + (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + '</button>' +
         '<button class="back-btn" onclick="showQuizTypeSelection()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
-function showVideos(){
+
+function showVideos() {
     if (selectedQuiz === "serviceadvisor") {
-        // عند الضغط على زر المقاطع التعليمية لمستشار الصيانة، سيتم فتح رابط جديد
-        window.open("https://360.articulate.com/review/content/99038e9a-83f7-44f0-a54b-d734bd6488e7/review", "_blank");
-    } else {
-        // للمبيعات والتسويق
         document.getElementById('app').innerHTML =
-          '<h2>'+(lang==='ar'?'المقاطع التعليمية':'Video Lessons')+'</h2>'+
-          '<p>'+(lang==='ar'?'سيتم إدراج الفيديوهات هنا.':'Videos will be shown here.')+'</p>'+
-          '<button class="back-btn" onclick="showCourseOptions()">'+
-          (lang==='ar'?'رجوع':'Back')+'</button>';
+            '<h2>' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</h2>' +
+            '<button onclick="window.open(\'https://360.articulate.com/review/content/99038e9a-83f7-44f0-a54b-d734bd6488e7/review\', \'_blank\')">' +
+            (lang === 'ar' ? ' Customer Delight ' : 'Customer Delight') + '</button>' +
+            '<button onclick="showGoogleForm()">' +
+            (lang === 'ar' ? '  الاختبار التجريبي بعد مشاهدة الفيديو ' : ' Pilot test after watching the video') + '</button>' +
+            '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+    } else {
+        document.getElementById('app').innerHTML =
+            '<h2>' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</h2>' +
+            '<p>' + (lang === 'ar' ? 'سيتم إدراج الفيديوهات هنا.' : 'Videos will be shown here.') + '</p>' +
+            '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
 }
-function showGame(){
+
+function showGame() {
     document.getElementById('app').innerHTML =
-      '<h2>'+(lang==='ar'?'اللعبة التدريبية':'Training Game')+'</h2>'+
-      '<p>'+(lang==='ar'?'محاكاة تفاعلية لتجربة المهام.':'Interactive simulation game.')+'</p>'+
-      '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+        '<h2>' + (lang === 'ar' ? 'اللعبة التدريبية' : 'Training Game') + '</h2>' +
+        '<p>' + (lang === 'ar' ? 'محاكاة تفاعلية لتجربة المهام.' : 'Interactive simulation game.') + '</p>' +
+        '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
-function showContent(){
+
+function showContent() {
     if (selectedQuiz === "serviceadvisor") {
-        // فقط ملف Google Drive المطلوب
-        var driveFileURL = "https://drive.google.com/file/d/1tLQpt1oEOnqD5vud0crBGXcljX4HMX94/view?usp=sharing";
+        var driveFileURL = "https://drive.google.com/file/d/1JNK2KjCgx1WbhTiabAaTnk6vH0Taz5aF/view?usp=sharing";
 
         document.getElementById('app').innerHTML =
-          '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
-          '<p>' + (lang === 'ar' ? 'اضغط على الزر أدناه لعرض الملف:' : 'Click the button below to open the file:') + '</p>' +
-          '<button onclick="window.open(\'' + driveFileURL + '\', \'_blank\')">📄 Customer Delight</button>' +
-          '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+            '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
+            '<p>' + (lang === 'ar' ? 'اضغط على الزر أدناه لعرض الملف:' : 'Click the button below to open the file:') + '</p>' +
+            '<button onclick="window.open(\'' + driveFileURL + '\', \'_blank\')">📄 Customer Delight</button>' +
+            '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     } else {
-        // للمبيعات والتسويق
         document.getElementById('app').innerHTML =
-          '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
-          '<p>' + (lang === 'ar' ? 'سيتم إدراج ملفات ومواد الدورة هنا.' : 'Training materials will be added here.') + '</p>' +
-          '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+            '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
+            '<p>' + (lang === 'ar' ? 'سيتم إدراج ملفات ومواد الدورة هنا.' : 'Training materials will be added here.') + '</p>' +
+            '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
 }
+
 function showPasswordInput() {  
-    var correctPassword = "1234"; 
+    var correctPassword = "9"; 
     document.getElementById('app').innerHTML =
         '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور' : 'Enter Password') + '</h2>' +
         '<input type="password" id="passwordInput" placeholder="' + (lang === 'ar' ? 'كلمة المرور' : 'Password') + '" />' +
         '<button onclick="checkPassword(\'' + correctPassword + '\')">' + (lang === 'ar' ? 'تأكيد' : 'Confirm') + '</button>' +
         '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
+
 function checkPassword(correctPassword) {
     var enteredPassword = document.getElementById('passwordInput').value;
     if (enteredPassword === correctPassword) {
@@ -367,27 +370,45 @@ function checkPassword(correctPassword) {
         alert(lang === 'ar' ? 'كلمة مرور خاطئة! حاول مرة أخرى.' : 'Incorrect password! Try again.');
     }
 }
+
 function showGoogleForm() {
-    var formURL = "";
-    var evaluationURL = "https://forms.gle/SoroUemofhoK96uP6"; 
+    inTestPage = true;
+    var formURL = "https://docs.google.com/forms/d/e/1FAIpQLScnFWFTdGMQHu6vs5tUWjGjZpYC0umkAfS6cK5Uvxm4o4daEg/viewform?embedded=true"; 
+    var buttons = "";
+
+    // 👇 إذا كان الاختبار يخص Delight (مستشار الصيانة) نعرض زر "رجوع" فقط
     if (selectedQuiz === "serviceadvisor") {
-        formURL = "https://docs.google.com/forms/d/1LmLC9OI1-2PCdKQDypQqih0yROCu94_zyO3axObHZ90/viewform?embedded=true"; 
-    } else if (selectedQuiz === "salesmarketing") {
-        formURL = "https://forms.gle/SoroUemofhoK96uP6"; 
+        buttons = '<button class="back-btn" onclick="showVideos()">' + 
+                  (lang === 'ar' ? 'رجوع' : 'Back') + 
+                  '</button>';
+    } 
+    // 👇 أما لبقية الدورات فنظهر زر تقييم الدورة
+    else {
+        buttons = '<button onclick="showEvaluation()">⭐ ' + 
+                  (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + 
+                  '</button>';
     }
+
     document.getElementById('app').innerHTML =
-        '<h2>' + (lang === 'ar' ? 'نموذج الاختبار' : 'Quiz Form') + '</h2>' +
-        '<iframe src="' + formURL + '"></iframe>' +
-        '<button onclick="showEvaluation()">' + (lang === 'ar' ? '⭐ تقييم الدورة' : '⭐ Course Evaluation') + '</button>' +
-        '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+        '<h2>' + 
+        (lang === 'ar' ? 'نموذج الاختبار' : 'Quiz Form') + 
+        '</h2>' +
+        '<iframe src="' + formURL + 
+        '" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+        buttons;
 }
-function showEvaluation(){
+
+// 🎯 دالة لتقييم الدورة
+function showEvaluation() {
+    inTestPage = false;
     var evaluationURL = "https://forms.gle/SoroUemofhoK96uP6";
     document.getElementById('app').innerHTML =
-      '<h2>'+(lang==='ar'?'تقييم الدورة':'Course Evaluation')+'</h2>'+
-      '<iframe src="'+evaluationURL+'"></iframe>'+
-      '<button class="back-btn" onclick="showCourseOptions()">'+(lang==='ar'?'رجوع':'Back')+'</button>';
+        '<h2>' + (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + '</h2>' +
+        '<iframe src="' + evaluationURL + '?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+        '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
+
+// 🔒 منع الخروج من الاختبار أثناء الحل
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'hidden' && inTestPage) {
         alert(lang === 'ar' ? 'لقد غادرت صفحة الاختبار. سيتم إعادتك إلى الصفحة الأولى.' : 'You have left the quiz page. You will be redirected to the first page.');
@@ -395,6 +416,7 @@ document.addEventListener('visibilitychange', function() {
         inTestPage = false; 
     }
 });
+
 showQuizTypeSelection();
 </script>
 </body>

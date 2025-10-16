@@ -304,7 +304,7 @@ function showCourseOptions() {
     document.getElementById('app').innerHTML =
         '<h2>' + title + '</h2>' +
         '<button onclick="showVideos()">🎬 ' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</button>' +
-        '<button onclick="showGame()">🎮 ' + (lang === 'ar' ? 'لعبة تدريبية' : 'Training Game') + '</button>' +
+        '<button onclick="showGame()">🎮 ' + (lang === 'ar' ? 'تمثيل دور' : ' Role playing') + '</button>' +
         '<button onclick="showContent()">📘 ' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</button>' +
         '<button onclick="showPasswordInput()">📝 ' + (lang === 'ar' ? 'الاختبار' : 'Quiz') + '</button>' +
         '<button onclick="showEvaluation()">⭐ ' + (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + '</button>' +
@@ -317,8 +317,8 @@ function showVideos() {
             '<h2>' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</h2>' +
             '<button onclick="window.open(\'https://360.articulate.com/review/content/99038e9a-83f7-44f0-a54b-d734bd6488e7/review\', \'_blank\')">' +
             (lang === 'ar' ? ' Customer Delight ' : 'Customer Delight') + '</button>' +
-            '<button onclick="showGoogleForm()">' +
-            (lang === 'ar' ? '  الاختبار التجريبي بعد مشاهدة الفيديو ' : ' Pilot test after watching the video') + '</button>' +
+            '<button onclick="openPilotTest()">' +
+            (lang === 'ar' ? 'الاختبار التجريبي بعد مشاهدة الفيديو' : 'Pilot test after watching the video') + '</button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     } else {
         document.getElementById('app').innerHTML =
@@ -326,6 +326,27 @@ function showVideos() {
             '<p>' + (lang === 'ar' ? 'سيتم إدراج الفيديوهات هنا.' : 'Videos will be shown here.') + '</p>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
+}
+
+// ✅ الرمز الجديد حسب اللغة
+function openPilotTest() {
+    if (lang === 'ar') {
+        window.open("https://docs.google.com/forms/d/e/1FAIpQLScnFWFTdGMQHu6vs5tUWjGjZpYC0umkAfS6cK5Uvxm4o4daEg/viewform?usp=dialog", "_blank");
+    } else {
+        window.open("https://docs.google.com/forms/d/e/1FAIpQLSdoD_e5LYB_ctOlWk4SkxxvR6A_h5RFj5_VPHCEOCrw-xMW-Q/viewform?usp=dialog", "_blank");
+    }
+}
+/* ✅ الآن يفتح داخل نفس الصفحة */
+function openPilotTest() {
+  var formURL =
+    lang === 'ar'
+      ? "https://docs.google.com/forms/d/e/1FAIpQLScnFWFTdGMQHu6vs5tUWjGjZpYC0umkAfS6cK5Uvxm4o4daEg/viewform?embedded=true"
+      : "https://docs.google.com/forms/d/e/1FAIpQLSdoD_e5LYB_ctOlWk4SkxxvR6A_h5RFj5_VPHCEOCrw-xMW-Q/viewform?embedded=true";
+
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'الاختبار التجريبي' : 'Pilot Test') + '</h2>' +
+    '<iframe src="' + formURL + '" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+    '<button class="back-btn" onclick="showVideos()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
 function showGame() {
@@ -337,12 +358,13 @@ function showGame() {
 
 function showContent() {
     if (selectedQuiz === "serviceadvisor") {
-        var driveFileURL = "https://drive.google.com/file/d/1JNK2KjCgx1WbhTiabAaTnk6vH0Taz5aF/view?usp=sharing";
-
+        var driveFileURL1 = "https://drive.google.com/file/d/1JNK2KjCgx1WbhTiabAaTnk6vH0Taz5aF/view?usp=sharing";
+        var driveFileURL2 = "https://drive.google.com/file/d/1U-IYCOsEiSGEXcNial5_Cwy7GyfgqZTk/view?usp=sharing";
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
-            '<p>' + (lang === 'ar' ? 'اضغط على الزر أدناه لعرض الملف:' : 'Click the button below to open the file:') + '</p>' +
-            '<button onclick="window.open(\'' + driveFileURL + '\', \'_blank\')">📄 Customer Delight</button>' +
+            '<p>' + (lang === 'ar' ? 'اضغط على الزر أدناه لعرض الملفات:' : 'Click the buttons below to open the files:') + '</p>' +
+            '<button onclick="window.open(\'' + driveFileURL1 + '\', \'_blank\')">📄 Customer Care Skills </button>' +
+            '<button onclick="window.open(\'' + driveFileURL2 + '\', \'_blank\')">📘 Service Advisor Guid book </button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     } else {
         document.getElementById('app').innerHTML =
@@ -376,14 +398,11 @@ function showGoogleForm() {
     var formURL = "https://docs.google.com/forms/d/e/1FAIpQLScnFWFTdGMQHu6vs5tUWjGjZpYC0umkAfS6cK5Uvxm4o4daEg/viewform?embedded=true"; 
     var buttons = "";
 
-    // 👇 إذا كان الاختبار يخص Delight (مستشار الصيانة) نعرض زر "رجوع" فقط
     if (selectedQuiz === "serviceadvisor") {
         buttons = '<button class="back-btn" onclick="showVideos()">' + 
                   (lang === 'ar' ? 'رجوع' : 'Back') + 
                   '</button>';
-    } 
-    // 👇 أما لبقية الدورات فنظهر زر تقييم الدورة
-    else {
+    } else {
         buttons = '<button onclick="showEvaluation()">⭐ ' + 
                   (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + 
                   '</button>';
@@ -398,7 +417,6 @@ function showGoogleForm() {
         buttons;
 }
 
-// 🎯 دالة لتقييم الدورة
 function showEvaluation() {
     inTestPage = false;
     var evaluationURL = "https://forms.gle/SoroUemofhoK96uP6";
@@ -408,7 +426,6 @@ function showEvaluation() {
         '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-// 🔒 منع الخروج من الاختبار أثناء الحل
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'hidden' && inTestPage) {
         alert(lang === 'ar' ? 'لقد غادرت صفحة الاختبار. سيتم إعادتك إلى الصفحة الأولى.' : 'You have left the quiz page. You will be redirected to the first page.');

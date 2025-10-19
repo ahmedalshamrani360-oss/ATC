@@ -321,14 +321,16 @@ function showVideos() {
             (lang === 'ar' ? 'الاختبار التجريبي بعد مشاهدة الفيديو' : 'Pilot test after watching the video') + '</button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     } else {
+        /* ✅ تمت الإضافة هنا زر Drivepass */
+        var driveVideoLink = "https://drive.google.com/file/d/1-DAK4Nt8hF5sqtKn6E76Hg2-svx6Fhe5/view?usp=sharing";
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</h2>' +
             '<p>' + (lang === 'ar' ? 'سيتم إدراج الفيديوهات هنا.' : 'Videos will be shown here.') + '</p>' +
+            '<button onclick="window.open(\'' + driveVideoLink + '\', \'_blank\')">📁 Drivepass</button>' + 
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
 }
-
-// ✅ الرمز الجديد حسب اللغة
+/* ✅ الرمز الجديد حسب اللغة */
 function openPilotTest() {
     if (lang === 'ar') {
         window.open("https://docs.google.com/forms/d/e/1FAIpQLScnFWFTdGMQHu6vs5tUWjGjZpYC0umkAfS6cK5Uvxm4o4daEg/viewform?usp=dialog", "_blank");
@@ -356,6 +358,7 @@ function showGame() {
         '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
+/* ✅ تم الإضافة هنا فقط */
 function showContent() {
     if (selectedQuiz === "serviceadvisor") {
         var driveFileURL1 = "https://drive.google.com/file/d/1JNK2KjCgx1WbhTiabAaTnk6vH0Taz5aF/view?usp=sharing";
@@ -367,12 +370,16 @@ function showContent() {
             '<button onclick="window.open(\'' + driveFileURL2 + '\', \'_blank\')">📘 Service Advisor Guid book </button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     } else {
+        /* 🔽 إضافة الزر الجديد فقط بدون حذف أي شيء */
+        var driveFileSales = "https://drive.google.com/file/d/1BkWrCUDOTzg15LP_Jh-0JMOFRwnfDQbz/view?usp=sharing";
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
             '<p>' + (lang === 'ar' ? 'سيتم إدراج ملفات ومواد الدورة هنا.' : 'Training materials will be added here.') + '</p>' +
+            '<button onclick="window.open(\'' + driveFileSales + '\', \'_blank\')">📁 Drivepass</button>' + 
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
 }
+/* ✅ نهاية الإضافة */
 
 function showPasswordInput() {  
     var correctPassword = "9"; 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> "ATC "</title>
+<title> ATC </title>
 <style>
 /* 🌍 الأساسيات */
 body {
@@ -281,6 +281,7 @@ iframe {
 var lang = localStorage.getItem('quizLang') || 'ar'; 
 var selectedQuiz = null;
 var inTestPage = false; 
+var selectedSubQuiz = null;
 
 function setLanguage(selectedLang) {
     lang = selectedLang;
@@ -306,11 +307,73 @@ function showCourseOptions() {
         '<button onclick="showVideos()">🎬 ' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</button>' +
         '<button onclick="showGame()">🎮 ' + (lang === 'ar' ? 'تمثيل دور' : ' Role playing') + '</button>' +
         '<button onclick="showContent()">📘 ' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</button>' +
-        '<button onclick="showPasswordInput()">📝 ' + (lang === 'ar' ? 'الاختبار' : 'Quiz') + '</button>' +
+        '<button onclick="showSAQuizzes()">📝 ' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</button>' +
         '<button onclick="showEvaluation()">⭐ ' + (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + '</button>' +
         '<button class="back-btn" onclick="showQuizTypeSelection()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
+/* ✅ شاشة اختبار مستشار الصيانة بخمس اختيارات */
+function showSAQuizzes() {
+  if (selectedQuiz !== "serviceadvisor") {
+    showPasswordInput();
+    return;
+  }
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
+    '<button onclick="showPasswordInputSA(1)">📘 Quiz 1: Customer Delight</button>' +
+    '<button onclick="showPasswordInputSA(2)">📘 Quiz 2: SA Roles & Responsibilities</button>' +
+    '<button onclick="showPasswordInputSA(3)">📘 Quiz 3: Customer Satisfaction</button>' +
+    '<button onclick="showPasswordInputSA(4)">📘 Quiz 4: Customer Care Skills</button>' +
+    '<button onclick="showPasswordInputSA(5)">📘 Final Quiz</button>' +
+    '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+/* ✅ لكل اختبار كلمة مرور مختلفة */
+function showPasswordInputSA(num) {
+  selectedSubQuiz = num;
+  var txt = '';
+  if (num === 1) txt = 'Quiz 1: Customer Delight';
+  if (num === 2) txt = 'Quiz 2: SA Roles & Responsibilities';
+  if (num === 3) txt = 'Quiz 3: Customer Satisfaction';
+  if (num === 4) txt = 'Quiz 4: Customer Care Skills';
+  if (num === 5) txt = 'Final Quiz';
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'ادخل كلمة المرور لـ ' : 'Enter Password for ') + txt + '</h2>' +
+    '<input type="password" id="passwordInput" placeholder="' + (lang === 'ar' ? 'كلمة المرور' : 'Password') + '" />' +
+    '<button onclick="checkPasswordSA()">' + (lang === 'ar' ? 'تأكيد' : 'Confirm') + '</button>' +
+    '<button class="back-btn" onclick="showSAQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+function checkPasswordSA() {
+  var enteredPassword = document.getElementById('passwordInput').value.trim();
+  var correct = '';
+  if (selectedSubQuiz === 1) correct = '3';
+  if (selectedSubQuiz === 2) correct = '6';
+  if (selectedSubQuiz === 3) correct = '9';
+  if (selectedSubQuiz === 4) correct = '0';
+  if (selectedSubQuiz === 5) correct = '3690';
+
+  if (enteredPassword === correct) {
+    showSAQuizForm(selectedSubQuiz);
+  } else {
+    alert(lang === 'ar' ? 'كلمة مرور خاطئة!' : 'Incorrect password!');
+  }
+}
+
+function showSAQuizForm(num) {
+  var url = "";
+  if (num === 1) url = "https://docs.google.com/forms/d/e/1FAIpQLScJLJnpZiKQxs37TJHzGaLm6Mbg-MfeWtkcfk0CMysOwHw4vA/viewform?usp=sharing&ouid=117356683965445434657";
+  if (num === 2) url = "https://docs.google.com/forms/d/e/1FAIpQLSfpGWyNOcJdXm-9CjdnTKy6mY3lfeVsc5z36PmOH0zDchZ8OA/viewform?usp=dialog";
+  if (num === 3) url = "https://docs.google.com/forms/d/e/1FAIpQLSdxKLyTPZmm0ckDQNp81k8ieYlyVS_HVguQNI_dLRnjd3CkTg/viewform?usp=dialog";
+  if (num === 4) url = "https://docs.google.com/forms/d/e/1FAIpQLScZy-v6lc3kElM11OpTNaka5Q9xVXitL2wsWkUbFZxwJOhKyw/viewform?usp=dialog";
+  if (num === 5) url = "YOUR_FORM_LINK_FINAL";
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'نموذج الاختبار' : 'Quiz Form') + '</h2>' +
+    '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+    '<button class="back-btn" onclick="showSAQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+/* باقي الكود كما هو بدون تعديل */
 function showVideos() {
     if (selectedQuiz === "serviceadvisor") {
         document.getElementById('app').innerHTML =
@@ -321,7 +384,6 @@ function showVideos() {
             (lang === 'ar' ? 'الاختبار التجريبي بعد مشاهدة الفيديو' : 'Pilot test after watching the video') + '</button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     } else {
-        /* ✅ تمت الإضافة هنا زر Drivepass */
         var driveVideoLink = "https://drive.google.com/file/d/1-DAK4Nt8hF5sqtKn6E76Hg2-svx6Fhe5/view?usp=sharing";
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</h2>' +
@@ -330,15 +392,7 @@ function showVideos() {
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
 }
-/* ✅ الرمز الجديد حسب اللغة */
-function openPilotTest() {
-    if (lang === 'ar') {
-        window.open("https://docs.google.com/forms/d/e/1FAIpQLScnFWFTdGMQHu6vs5tUWjGjZpYC0umkAfS6cK5Uvxm4o4daEg/viewform?usp=dialog", "_blank");
-    } else {
-        window.open("https://docs.google.com/forms/d/e/1FAIpQLSdoD_e5LYB_ctOlWk4SkxxvR6A_h5RFj5_VPHCEOCrw-xMW-Q/viewform?usp=dialog", "_blank");
-    }
-}
-/* ✅ الآن يفتح داخل نفس الصفحة */
+
 function openPilotTest() {
   var formURL =
     lang === 'ar'
@@ -358,7 +412,6 @@ function showGame() {
         '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* ✅ تم الإضافة هنا فقط */
 function showContent() {
     if (selectedQuiz === "serviceadvisor") {
         var driveFileURL1 = "https://drive.google.com/file/d/1JNK2KjCgx1WbhTiabAaTnk6vH0Taz5aF/view?usp=sharing";
@@ -370,7 +423,6 @@ function showContent() {
             '<button onclick="window.open(\'' + driveFileURL2 + '\', \'_blank\')">📘 Service Advisor Guid book </button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     } else {
-        /* 🔽 إضافة الزر الجديد فقط بدون حذف أي شيء */
         var driveFileSales = "https://drive.google.com/file/d/1BkWrCUDOTzg15LP_Jh-0JMOFRwnfDQbz/view?usp=sharing";
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
@@ -378,50 +430,6 @@ function showContent() {
             '<button onclick="window.open(\'' + driveFileSales + '\', \'_blank\')">📁 Drivepass</button>' + 
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
-}
-/* ✅ نهاية الإضافة */
-
-function showPasswordInput() {  
-    var correctPassword = "9"; 
-    document.getElementById('app').innerHTML =
-        '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور' : 'Enter Password') + '</h2>' +
-        '<input type="password" id="passwordInput" placeholder="' + (lang === 'ar' ? 'كلمة المرور' : 'Password') + '" />' +
-        '<button onclick="checkPassword(\'' + correctPassword + '\')">' + (lang === 'ar' ? 'تأكيد' : 'Confirm') + '</button>' +
-        '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
-}
-
-function checkPassword(correctPassword) {
-    var enteredPassword = document.getElementById('passwordInput').value;
-    if (enteredPassword === correctPassword) {
-        inTestPage = true; 
-        showGoogleForm();
-    } else {
-        alert(lang === 'ar' ? 'كلمة مرور خاطئة! حاول مرة أخرى.' : 'Incorrect password! Try again.');
-    }
-}
-
-function showGoogleForm() {
-    inTestPage = true;
-    var formURL = "https://docs.google.com/forms/d/e/1FAIpQLScnFWFTdGMQHu6vs5tUWjGjZpYC0umkAfS6cK5Uvxm4o4daEg/viewform?embedded=true"; 
-    var buttons = "";
-
-    if (selectedQuiz === "serviceadvisor") {
-        buttons = '<button class="back-btn" onclick="showVideos()">' + 
-                  (lang === 'ar' ? 'رجوع' : 'Back') + 
-                  '</button>';
-    } else {
-        buttons = '<button onclick="showEvaluation()">⭐ ' + 
-                  (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + 
-                  '</button>';
-    }
-
-    document.getElementById('app').innerHTML =
-        '<h2>' + 
-        (lang === 'ar' ? 'نموذج الاختبار' : 'Quiz Form') + 
-        '</h2>' +
-        '<iframe src="' + formURL + 
-        '" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
-        buttons;
 }
 
 function showEvaluation() {

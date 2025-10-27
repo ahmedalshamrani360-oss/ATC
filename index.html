@@ -312,7 +312,7 @@ function showCourseOptions() {
         '<button class="back-btn" onclick="showQuizTypeSelection()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* ✅ شاشة اختبار مستشار الصيانة بخمس اختيارات */
+/* ✅ إضافة زر Test */
 function showSAQuizzes() {
   if (selectedQuiz !== "serviceadvisor") {
     showPasswordInput();
@@ -320,6 +320,7 @@ function showSAQuizzes() {
   }
   document.getElementById('app').innerHTML =
     '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
+    '<button onclick="openSATest()">🧩 Test</button>' + 
     '<button onclick="showPasswordInputSA(1)">📘 Quiz 1: Customer Delight</button>' +
     '<button onclick="showPasswordInputSA(2)">📘 Quiz 2: SA Roles & Responsibilities</button>' +
     '<button onclick="showPasswordInputSA(3)">📘 Quiz 3: Customer Satisfaction</button>' +
@@ -328,7 +329,15 @@ function showSAQuizzes() {
     '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* ✅ لكل اختبار كلمة مرور مختلفة */
+function openSATest() {
+  var url = "https://docs.google.com/forms/d/e/1FAIpQLSfcSHvHZecOUbQrOMvfmgCEcdTh9s9q4f9X0NfaMZhtTJms6w/viewform?usp=dialog";
+  document.getElementById('app').innerHTML =
+    '<h2>🧩 Test</h2>' +
+    '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+    '<button class="back-btn" onclick="showSAQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+/* باقي الكود */
 function showPasswordInputSA(num) {
   selectedSubQuiz = num;
   var txt = '';
@@ -373,7 +382,6 @@ function showSAQuizForm(num) {
     '<button class="back-btn" onclick="showSAQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* باقي الكود كما هو بدون تعديل */
 function showVideos() {
     if (selectedQuiz === "serviceadvisor") {
         document.getElementById('app').innerHTML =

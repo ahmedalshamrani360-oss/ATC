@@ -312,7 +312,7 @@ function showCourseOptions() {
         '<button class="back-btn" onclick="showQuizTypeSelection()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* ✅ إضافة زر Test */
+/* ✅ قائمة الاختبارات */
 function showSAQuizzes() {
   if (selectedQuiz !== "serviceadvisor") {
     showPasswordInput();
@@ -337,7 +337,6 @@ function openSATest() {
     '<button class="back-btn" onclick="showSAQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* باقي الكود */
 function showPasswordInputSA(num) {
   selectedSubQuiz = num;
   var txt = '';
@@ -369,13 +368,15 @@ function checkPasswordSA() {
   }
 }
 
+/* ✅ استبدال رابط Final Quiz */
 function showSAQuizForm(num) {
   var url = "";
   if (num === 1) url = "https://docs.google.com/forms/d/e/1FAIpQLScJLJnpZiKQxs37TJHzGaLm6Mbg-MfeWtkcfk0CMysOwHw4vA/viewform?usp=sharing&ouid=117356683965445434657";
   if (num === 2) url = "https://docs.google.com/forms/d/e/1FAIpQLSfpGWyNOcJdXm-9CjdnTKy6mY3lfeVsc5z36PmOH0zDchZ8OA/viewform?usp=dialog";
   if (num === 3) url = "https://docs.google.com/forms/d/e/1FAIpQLSdxKLyTPZmm0ckDQNp81k8ieYlyVS_HVguQNI_dLRnjd3CkTg/viewform?usp=dialog";
   if (num === 4) url = "https://docs.google.com/forms/d/e/1FAIpQLScZy-v6lc3kElM11OpTNaka5Q9xVXitL2wsWkUbFZxwJOhKyw/viewform?usp=dialog";
-  if (num === 5) url = "YOUR_FORM_LINK_FINAL";
+  if (num === 5) url = "https://docs.google.com/forms/d/e/1FAIpQLSea7mUP3auJQsIx-I12oqxr5FBQ8ggF50xARMSE8TnC9CD_mQ/viewform?usp=dialog";
+
   document.getElementById('app').innerHTML =
     '<h2>' + (lang === 'ar' ? 'نموذج الاختبار' : 'Quiz Form') + '</h2>' +
     '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
@@ -420,13 +421,16 @@ function showGame() {
         '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
+/* ✅ تعديل المادة التدريبية */
 function showContent() {
     if (selectedQuiz === "serviceadvisor") {
         var driveFileURL1 = "https://drive.google.com/file/d/1JNK2KjCgx1WbhTiabAaTnk6vH0Taz5aF/view?usp=sharing";
         var driveFileURL2 = "https://drive.google.com/file/d/1U-IYCOsEiSGEXcNial5_Cwy7GyfgqZTk/view?usp=sharing";
+        var driveFileURL3 = "https://drive.google.com/file/d/1P3dDxDBja2B22BWKcu4CBbbNdMqp-RCk/view?usp=sharing";
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
             '<p>' + (lang === 'ar' ? 'اضغط على الزر أدناه لعرض الملفات:' : 'Click the buttons below to open the files:') + '</p>' +
+            '<button onclick="window.open(\'' + driveFileURL3 + '\', \'_blank\')">📘 Customer Delight L1p2</button>' +
             '<button onclick="window.open(\'' + driveFileURL1 + '\', \'_blank\')">📄 Customer Care Skills </button>' +
             '<button onclick="window.open(\'' + driveFileURL2 + '\', \'_blank\')">📘 Service Advisor Guid book </button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';

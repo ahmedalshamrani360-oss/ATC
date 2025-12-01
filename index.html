@@ -307,26 +307,58 @@ function showCourseOptions() {
         '<button onclick="showVideos()">🎬 ' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</button>' +
         '<button onclick="showGame()">🎮 ' + (lang === 'ar' ? 'تمثيل دور' : ' Role playing') + '</button>' +
         '<button onclick="showContent()">📘 ' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</button>' +
-        '<button onclick="showSAQuizzes()">📝 ' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</button>' +
+        '<button onclick="showSAQuizzesRoot()">📝 ' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</button>' +
         '<button onclick="showEvaluation()">⭐ ' + (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + '</button>' +
         '<button class="back-btn" onclick="showQuizTypeSelection()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* ✅ قائمة الاختبارات */
-function showSAQuizzes() {
-  if (selectedQuiz !== "serviceadvisor") {
-    showPasswordInput();
-    return;
-  }
+/* ✅ تقسيم جديد للاختبارات */
+function showSAQuizzesRoot() {
   document.getElementById('app').innerHTML =
     '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
+    '<button onclick="showSAQuizzes()">💡 ' + (lang === 'ar' ? 'Customer Care Skills' : 'Customer Care Skills') + '</button>' +
+    '<button onclick="showCertificationPassword()">📜 ' + (lang === 'ar' ? 'Certification Level_1' : 'Certification Level_1') + '</button>' +
+    '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+/* ✅ كلمة المرور لـ Certification Level_1 */
+function showCertificationPassword() {
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور لـ Certification Level_1' : 'Enter password for Certification Level_1') + '</h2>' +
+    '<input type="password" id="certPass" placeholder="' + (lang === 'ar' ? 'كلمة المرور' : 'Password') + '" />' +
+    '<button onclick="checkCertificationPass()">' + (lang === 'ar' ? 'تأكيد' : 'Confirm') + '</button>' +
+    '<button class="back-btn" onclick="showSAQuizzesRoot()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+function checkCertificationPass() {
+  var pass = document.getElementById("certPass").value.trim();
+  if (pass === "360") {
+    openCertificationLevel1();
+  } else {
+    alert(lang === "ar" ? "كلمة المرور خاطئة!" : "Incorrect password!");
+  }
+}
+
+/* ✅ صفحة Certification Level_1 */
+function openCertificationLevel1() {
+  var url = "https://docs.google.com/forms/d/e/1FAIpQLSf-MgYlNMACCBak-U2V7_e8fhtkyDzQukLe1k-LM1nExC827A/viewform?usp=dialog";
+  document.getElementById('app').innerHTML =
+    '<h2>📜 Certification Level 1</h2>' +
+    '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+    '<button class="back-btn" onclick="showSAQuizzesRoot()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+/* ✅ صفحة Customer Care Skills */
+function showSAQuizzes() {
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'Customer Care Skills' : 'Customer Care Skills') + '</h2>' +
     '<button onclick="openSATest()">🧩 Test</button>' + 
     '<button onclick="showPasswordInputSA(1)">📘 Quiz 1: Customer Delight</button>' +
     '<button onclick="showPasswordInputSA(2)">📘 Quiz 2: SA Roles & Responsibilities</button>' +
     '<button onclick="showPasswordInputSA(3)">📘 Quiz 3: Customer Satisfaction</button>' +
     '<button onclick="showPasswordInputSA(4)">📘 Quiz 4: Customer Care Skills</button>' +
     '<button onclick="showPasswordInputSA(5)">📘 Final Quiz</button>' +
-    '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+    '<button class="back-btn" onclick="showSAQuizzesRoot()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
 function openSATest() {
@@ -368,7 +400,6 @@ function checkPasswordSA() {
   }
 }
 
-/* ✅ استبدال رابط Final Quiz */
 function showSAQuizForm(num) {
   var url = "";
   if (num === 1) url = "https://docs.google.com/forms/d/e/1FAIpQLScJLJnpZiKQxs37TJHzGaLm6Mbg-MfeWtkcfk0CMysOwHw4vA/viewform?usp=sharing&ouid=117356683965445434657";
@@ -421,7 +452,6 @@ function showGame() {
         '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* ✅ تعديل المادة التدريبية */
 function showContent() {
     if (selectedQuiz === "serviceadvisor") {
         var driveFileURL1 = "https://drive.google.com/file/d/1JNK2KjCgx1WbhTiabAaTnk6vH0Taz5aF/view?usp=sharing";
@@ -463,5 +493,5 @@ document.addEventListener('visibilitychange', function() {
 
 showQuizTypeSelection();
 </script>
-</body>
+</body> 
 </html>

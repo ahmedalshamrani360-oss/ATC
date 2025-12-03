@@ -332,7 +332,7 @@ function showCertificationPassword() {
 
 function checkCertificationPass() {
   var pass = document.getElementById("certPass").value.trim();
-  if (pass === "960") {
+  if (pass === "9") {
     openCertificationLevel1();
   } else {
     alert(lang === "ar" ? "كلمة المرور خاطئة!" : "Incorrect password!");
@@ -340,7 +340,7 @@ function checkCertificationPass() {
 }
 
 /* ✅ صفحة Certification Level_1 */
-function openCertificationLevel1() {
+function openCertificationLevel1() {     
   var url = "https://docs.google.com/forms/d/e/1FAIpQLSf-MgYlNMACCBak-U2V7_e8fhtkyDzQukLe1k-LM1nExC827A/viewform?usp=dialog";
   document.getElementById('app').innerHTML =
     '<h2>📜 Certification Level 1</h2>' +

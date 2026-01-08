@@ -298,6 +298,48 @@ function showQuizTypeSelection() {
         '<button onclick="selectedQuiz=\'serviceadvisor\';showCourseOptions()">🛎 ' + (lang === 'ar' ? 'مستشار الصيانة' : 'Service Advisor') + '</button>' +
         '<button onclick="selectedQuiz=\'salesmarketing\';showCourseOptions()">💼 ' + (lang === 'ar' ? 'المبيعات والتسويق' : 'Sales & Marketing') + '</button>';
 }
+/* ⚙️ Process And System */
+function showProcessPassword() {
+  document.getElementById('app').innerHTML =
+    '<h2>' +
+    (lang === 'ar'
+      ? 'أدخل كلمة المرور لـ Process And System'
+      : 'Enter password for Process And System') +
+    '</h2>' +
+
+    '<input type="password" id="processPass" placeholder="' +
+    (lang === 'ar' ? 'كلمة المرور' : 'Password') + '">' +
+
+    '<button onclick="checkProcessPass()">' +
+    (lang === 'ar' ? 'تأكيد' : 'Confirm') +
+    '</button>' +
+
+    '<button class="back-btn" onclick="showSAQuizzesRoot()">' +
+    (lang === 'ar' ? 'رجوع' : 'Back') +
+    '</button>';
+}
+
+function checkProcessPass() {
+  var pass = document.getElementById('processPass').value.trim();
+  if (pass === '5055') {
+    openProcessForm();
+  } else {
+    alert(lang === 'ar' ? 'كلمة المرور خاطئة!' : 'Incorrect password!');
+  }
+}
+
+function openProcessForm() {
+  var url =
+    'https://docs.google.com/forms/d/e/1FAIpQLSfkff354e2uZoK2S5ybRyMjHSRnFc3q-IilTGpvEsh1vkCe6A/viewform?usp=dialog';
+
+  document.getElementById('app').innerHTML =
+    '<h2>⚙️ Process And System</h2>' +
+    '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+    '<button class="back-btn" onclick="showSAQuizzesRoot()">' +
+    (lang === 'ar' ? 'رجوع' : 'Back') +
+    '</button>';
+}
+
 
 function showCourseOptions() {
     inTestPage = false;
@@ -314,12 +356,27 @@ function showCourseOptions() {
 
 /* ✅ تقسيم جديد للاختبارات */
 function showSAQuizzesRoot() {
-  document.getElementById('app').innerHTML =
-    '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
-    '<button onclick="showSAQuizzes()">💡 ' + (lang === 'ar' ? 'Customer Care Skills' : 'Customer Care Skills') + '</button>' +
-    '<button onclick="showCertificationPassword()">📜 ' + (lang === 'ar' ? 'Certification Level_1' : 'Certification Level_1') + '</button>' +
-    '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+  if (selectedQuiz === 'salesmarketing') {
+    document.getElementById('app').innerHTML =
+      '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
+      '<p>' + (lang === 'ar' ? 'لا يوجد اختبارات حالياً' : 'No tests available at the moment') + '</p>' +
+      '<button class="back-btn" onclick="showCourseOptions()">' +
+      (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+  } else {
+    document.getElementById('app').innerHTML =
+      '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
+
+      '<button onclick="showProcessPassword()">⚙️ Process And System</button>' +
+
+      '<button onclick="showSAQuizzes()">💡 Customer Care Skills</button>' +
+
+      '<button onclick="showCertificationPassword()">📜 Certification Level_1</button>' +
+
+      '<button class="back-btn" onclick="showCourseOptions()">' +
+      (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+  }
 }
+
 
 /* ✅ كلمة المرور لـ Certification Level_1 */
 function showCertificationPassword() {
@@ -347,6 +404,8 @@ function openCertificationLevel1() {
     '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
     '<button class="back-btn" onclick="showSAQuizzesRoot()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
+
+
 
 /* ✅ صفحة Customer Care Skills */
 function showSAQuizzes() {

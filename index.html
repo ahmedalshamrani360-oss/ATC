@@ -298,6 +298,7 @@ function showQuizTypeSelection() {
         '<button onclick="selectedQuiz=\'serviceadvisor\';showCourseOptions()">🛎 ' + (lang === 'ar' ? 'مستشار الصيانة' : 'Service Advisor') + '</button>' +
         '<button onclick="selectedQuiz=\'salesmarketing\';showCourseOptions()">💼 ' + (lang === 'ar' ? 'المبيعات والتسويق' : 'Sales & Marketing') + '</button>';
 }
+
 /* ⚙️ Process And System */
 function showProcessPassword() {
   document.getElementById('app').innerHTML =
@@ -309,7 +310,7 @@ function showProcessPassword() {
 
     '<input type="password" id="processPass" placeholder="' +
     (lang === 'ar' ? 'كلمة المرور' : 'Password') + '">' +
-
+ 
     '<button onclick="checkProcessPass()">' +
     (lang === 'ar' ? 'تأكيد' : 'Confirm') +
     '</button>' +
@@ -357,12 +358,14 @@ function showCourseOptions() {
 /* ✅ تقسيم جديد للاختبارات */
 function showSAQuizzesRoot() {
   if (selectedQuiz === 'salesmarketing') {
+    // اختبارات المبيعات والتسويق
     document.getElementById('app').innerHTML =
-      '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
-      '<p>' + (lang === 'ar' ? 'لا يوجد اختبارات حالياً' : 'No tests available at the moment') + '</p>' +
+      '<h2>' + (lang === 'ar' ? 'الاختبارات - المبيعات والتسويق' : 'Quizzes - Sales & Marketing') + '</h2>' +
+      '<button onclick="showSalesMarketingQuizzes()">🎧 Yamaha audio system & Outlander differences</button>' +
       '<button class="back-btn" onclick="showCourseOptions()">' +
       (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
   } else {
+    // اختبارات مستشار الصيانة
     document.getElementById('app').innerHTML =
       '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
 
@@ -549,6 +552,46 @@ document.addEventListener('visibilitychange', function() {
         inTestPage = false; 
     }
 });
+
+/* ==== قسم المبيعات والتسويق: كلمة مرور وفتح الاختبار ==== */
+
+// شاشة اختيار اختبار واحد لقسم المبيعات والتسويق
+function showSalesMarketingQuizzes() {
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'Yamaha audio system & Outlander differences' : 'Yamaha audio system & Outlander differences') + '</h2>' +
+    '<button onclick="showSalesMarketingPassword()">' +
+    (lang === 'ar' ? 'فتح الاختبار' : 'Open Quiz') + '</button>' +
+    '<button class="back-btn" onclick="showSAQuizzesRoot()">' +
+    (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+// صفحة كلمة المرور للاختبار
+function showSalesMarketingPassword() {
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور' : 'Enter Password') + '</h2>' +
+    '<input type="password" id="salesMktPass" placeholder="' + (lang === 'ar' ? 'كلمة المرور' : 'Password') + '" />' +
+    '<button onclick="checkSalesMarketingPass()">' + (lang === 'ar' ? 'تأكيد' : 'Confirm') + '</button>' +
+    '<button class="back-btn" onclick="showSalesMarketingQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+// التحقق من كلمة المرور ثم فتح النموذج داخل iframe
+function checkSalesMarketingPass() {
+  var pass = document.getElementById('salesMktPass').value.trim();
+  if (pass === 'ATC') {
+    openSalesMarketingQuiz();
+  } else {
+    alert(lang === 'ar' ? 'كلمة المرور خاطئة!' : 'Incorrect password!');
+  }
+}
+
+function openSalesMarketingQuiz() {
+  var url = 'https://docs.google.com/forms/d/e/1FAIpQLSdHVQbqbCyRlrg0XGQ5S6O5mPwwybOxasiT-lFXItBSMZxAtA/viewform?usp=publish-editor';
+  document.getElementById('app').innerHTML =
+    '<h2>🎧 Yamaha audio system & Outlander differences</h2>' +
+    '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+    '<button class="back-btn" onclick="showSalesMarketingQuizzes()">' +
+    (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
 
 showQuizTypeSelection();
 </script>

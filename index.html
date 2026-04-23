@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> ATC </title>
 <style>
-/* 🌍 الأساسيات */
 body {
   font-family: "Segoe UI", Tahoma, Arial, sans-serif;
   background: #140505;
@@ -16,8 +15,6 @@ body {
   align-items: center;
   min-height: 100vh;
 }
-
-/* 📦 الصندوق الرئيسي */
 .container {
   width: 80%;
   max-width: 600px;
@@ -31,16 +28,12 @@ body {
   overflow-y: auto;
   margin-top: 180px;
 }
-
-/* 📝 العناوين */
 h1, h2 {
   text-align: center;
   color: #B3000F;
   margin-bottom: 20px;
   font-size: 1.5rem;
 }
-
-/* 🔘 الأزرار */
 button {
   display: block;
   width: 100%;
@@ -60,16 +53,12 @@ button:hover {
   transform: translateY(-6px);
   box-shadow: 0 4px 8px rgba(179,0,15,0.4);
 }
-
-/* ⬅ زر الرجوع */
 .back-btn {
   background: linear-gradient(145deg, #555, #272727);
 }
 .back-btn:hover {
   background: linear-gradient(145deg, #333, #111);
 }
-
-/* 🔑 حقل الإدخال */
 input[type="password"] {
   width: 100%;
   padding: 10px;
@@ -79,16 +68,12 @@ input[type="password"] {
   font-size: 14px;
   box-sizing: border-box;
 }
-
-/* 📑 iframe */
 iframe {
   width: 100%;
   height: 60vh;
   border: none;
   border-radius: 8px;
 }
-
-/* 🌐 أزرار اختيار اللغة */
 .lang-switch {
   position: absolute;
   top: 20px;
@@ -107,8 +92,6 @@ iframe {
 .lang-switch button:hover {
   background: #111;
 }
-
-/* 🔺 الشعار أعلى يمين */
 .top-right-logo {
   position: absolute;
   top: 15px;
@@ -117,8 +100,6 @@ iframe {
   height: auto;
   z-index: 1100;
 }
-
-/* 🎲 المكعب */
 .animation-container {
   position: absolute;
   top: 15%;
@@ -155,13 +136,10 @@ iframe {
 .left   { transform: rotateY(-90deg) translateZ(100px); }
 .top    { transform: rotateX(90deg) translateZ(100px); }
 .bottom { transform: rotateX(-90deg) translateZ(100px); }
-
 @keyframes cubeRotate {
   from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
   to   { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
 }
-
-/* 🔻 شعار ميتسوبيشي */
 .mitsu {
   position: relative;
   width: 60px;
@@ -170,9 +148,9 @@ iframe {
 }
 .rhombus {
   position: absolute;
-  top: 50%; 
+  top: 50%;
   left: 50%;
-  width: 0; 
+  width: 0;
   height: 0;
   border: 15px solid transparent;
   border-bottom: 30px solid #e60012;
@@ -183,7 +161,7 @@ iframe {
   position: absolute;
   left: -15px;
   top: 30px;
-  width: 0; 
+  width: 0;
   height: 0;
   border: 15px solid transparent;
   border-top: 30px solid #e60012;
@@ -191,7 +169,6 @@ iframe {
 .top-rhombus    { transform: translate(-50%, -50%) rotate(0deg); }
 .left-rhombus   { transform: translate(-50%, -50%) rotate(-120deg); }
 .right-rhombus  { transform: translate(-50%, -50%) rotate(120deg); }
-
 .fuso-text {
   font-size: 1.6rem;
   font-weight: 900;
@@ -202,11 +179,8 @@ iframe {
   padding: 3px 8px;
   border-radius: 4px;
 }
-
-/* 📱 تصميم خاص للجوال */
 @media (max-width: 600px) {
   h1, h2 { font-size: 1.1rem; }
-
   .container {
     width: 90%;
     max-width: 420px;
@@ -214,9 +188,7 @@ iframe {
     height: auto;
     min-height: 180px;
   }
-
   .animation-container { top: 22%; }
-
   .cube { width: 140px; height: 140px; }
   .cube-face { width: 140px; height: 140px; font-size: 0.9rem; }
   .front  { transform: rotateY(0deg) translateZ(70px); }
@@ -225,29 +197,22 @@ iframe {
   .left   { transform: rotateY(-90deg) translateZ(70px); }
   .top    { transform: rotateX(90deg) translateZ(70px); }
   .bottom { transform: rotateX(-90deg) translateZ(70px); }
-
   .mitsu { width: 50px; height: 50px; }
   .rhombus { border: 14px solid transparent; border-bottom: 28px solid #e60012; }
   .rhombus:after { left: -14px; top: 28px; border: 14px solid transparent; border-top: 28px solid #e60012; }
-
   .fuso-text { font-size: 1.1rem; padding: 4px 8px; }
 }
-
-/* 💻 تصميم خاص للكمبيوتر */
 @media (min-width: 1025px) {
-  .container { 
-    width: 70%; 
-    max-width: 1000px; 
-    margin-top: 100px; 
-    max-height: 80vh; 
+  .container {
+    width: 70%;
+    max-width: 1000px;
+    margin-top: 100px;
+    max-height: 80vh;
   }
-
   .cube { width: 200px; height: 200px; }
   .cube-face { font-size: 1.4rem; }
   .fuso-text { font-size: 2rem; padding: 6px 12px; }
-
   .top-right-logo { width: 250px; }
-
   .lang-switch button {
     font-size: 1.2rem;
     padding: 8px 18px;
@@ -278,9 +243,9 @@ iframe {
 <div class="container" id="app"></div>
 
 <script>
-var lang = localStorage.getItem('quizLang') || 'ar'; 
+var lang = localStorage.getItem('quizLang') || 'ar';
 var selectedQuiz = null;
-var inTestPage = false; 
+var inTestPage = false;
 var selectedSubQuiz = null;
 
 function setLanguage(selectedLang) {
@@ -290,7 +255,7 @@ function setLanguage(selectedLang) {
 }
 
 function showQuizTypeSelection() {
-    selectedQuiz = null; 
+    selectedQuiz = null;
     inTestPage = false;
     var title = lang === 'ar' ? "اختر نوع الدورة" : "Choose Course Type";
     document.getElementById('app').innerHTML =
@@ -299,25 +264,12 @@ function showQuizTypeSelection() {
         '<button onclick="selectedQuiz=\'salesmarketing\';showCourseOptions()">💼 ' + (lang === 'ar' ? 'المبيعات والتسويق' : 'Sales & Marketing') + '</button>';
 }
 
-/* ⚙️ Process And System */
 function showProcessPassword() {
   document.getElementById('app').innerHTML =
-    '<h2>' +
-    (lang === 'ar'
-      ? 'أدخل كلمة المرور لـ Process And System'
-      : 'Enter password for Process And System') +
-    '</h2>' +
-
-    '<input type="password" id="processPass" placeholder="' +
-    (lang === 'ar' ? 'كلمة المرور' : 'Password') + '">' +
- 
-    '<button onclick="checkProcessPass()">' +
-    (lang === 'ar' ? 'تأكيد' : 'Confirm') +
-    '</button>' +
-
-    '<button class="back-btn" onclick="showSAQuizzesRoot()">' +
-    (lang === 'ar' ? 'رجوع' : 'Back') +
-    '</button>';
+    '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور لـ Process And System' : 'Enter password for Process And System') + '</h2>' +
+    '<input type="password" id="processPass" placeholder="' + (lang === 'ar' ? 'كلمة المرور' : 'Password') + '">' +
+    '<button onclick="checkProcessPass()">' + (lang === 'ar' ? 'تأكيد' : 'Confirm') + '</button>' +
+    '<button class="back-btn" onclick="showSAQuizzesRoot()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
 function checkProcessPass() {
@@ -330,17 +282,12 @@ function checkProcessPass() {
 }
 
 function openProcessForm() {
-  var url =
-    'https://docs.google.com/forms/d/e/1FAIpQLSfkff354e2uZoK2S5ybRyMjHSRnFc3q-IilTGpvEsh1vkCe6A/viewform?usp=dialog';
-
+  var url = 'https://docs.google.com/forms/d/e/1FAIpQLSfkff354e2uZoK2S5ybRyMjHSRnFc3q-IilTGpvEsh1vkCe6A/viewform?usp=dialog';
   document.getElementById('app').innerHTML =
     '<h2>⚙️ Process And System</h2>' +
     '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
-    '<button class="back-btn" onclick="showSAQuizzesRoot()">' +
-    (lang === 'ar' ? 'رجوع' : 'Back') +
-    '</button>';
+    '<button class="back-btn" onclick="showSAQuizzesRoot()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
-
 
 function showCourseOptions() {
     inTestPage = false;
@@ -348,40 +295,26 @@ function showCourseOptions() {
     document.getElementById('app').innerHTML =
         '<h2>' + title + '</h2>' +
         '<button onclick="showVideos()">🎬 ' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</button>' +
-        '<button onclick="showGame()">🎮 ' + (lang === 'ar' ? 'تمثيل دور' : ' Role playing') + '</button>' +
+        '<button onclick="showGame()">🎮 ' + (lang === 'ar' ? 'تمثيل دور' : 'Role playing') + '</button>' +
         '<button onclick="showContent()">📘 ' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</button>' +
         '<button onclick="showSAQuizzesRoot()">📝 ' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</button>' +
         '<button onclick="showEvaluation()">⭐ ' + (lang === 'ar' ? 'تقييم الدورة' : 'Course Evaluation') + '</button>' +
         '<button class="back-btn" onclick="showQuizTypeSelection()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-/* ✅ تقسيم جديد للاختبارات */
 function showSAQuizzesRoot() {
   if (selectedQuiz === 'salesmarketing') {
-    // اختبارات المبيعات والتسويق
-    document.getElementById('app').innerHTML =
-      '<h2>' + (lang === 'ar' ? 'الاختبارات - المبيعات والتسويق' : 'Quizzes - Sales & Marketing') + '</h2>' +
-      '<button onclick="showSalesMarketingQuizzes()">🎧 Yamaha audio system & Outlander differences</button>' +
-      '<button class="back-btn" onclick="showCourseOptions()">' +
-      (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+    showSalesMarketingQuizzes();
   } else {
-    // اختبارات مستشار الصيانة
     document.getElementById('app').innerHTML =
       '<h2>' + (lang === 'ar' ? 'الاختبارات' : 'Quizzes') + '</h2>' +
-
       '<button onclick="showProcessPassword()">⚙️ Process And System</button>' +
-
       '<button onclick="showSAQuizzes()">💡 Customer Care Skills</button>' +
-
       '<button onclick="showCertificationPassword()">📜 Certification Level_1</button>' +
-
-      '<button class="back-btn" onclick="showCourseOptions()">' +
-      (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+      '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
   }
 }
 
-
-/* ✅ كلمة المرور لـ Certification Level_1 */
 function showCertificationPassword() {
   document.getElementById('app').innerHTML =
     '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور لـ Certification Level_1' : 'Enter password for Certification Level_1') + '</h2>' +
@@ -395,12 +328,11 @@ function checkCertificationPass() {
   if (pass === "ATC") {
     openCertificationLevel1();
   } else {
-    alert(lang === "ar" ? "كلمة المرور خاطئة!" : "Incorrect password!");               
+    alert(lang === "ar" ? "كلمة المرور خاطئة!" : "Incorrect password!");
   }
-}   
+}
 
-/* ✅ صفحة Certification Level_1 */
-function openCertificationLevel1() {     
+function openCertificationLevel1() {
   var url = "https://docs.google.com/forms/d/e/1FAIpQLSf-MgYlNMACCBak-U2V7_e8fhtkyDzQukLe1k-LM1nExC827A/viewform?usp=dialog";
   document.getElementById('app').innerHTML =
     '<h2>📜 Certification Level 1</h2>' +
@@ -408,13 +340,10 @@ function openCertificationLevel1() {
     '<button class="back-btn" onclick="showSAQuizzesRoot()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-
-
-/* ✅ صفحة Customer Care Skills */
 function showSAQuizzes() {
   document.getElementById('app').innerHTML =
-    '<h2>' + (lang === 'ar' ? 'Customer Care Skills' : 'Customer Care Skills') + '</h2>' +
-    '<button onclick="openSATest()">🧩 Test</button>' + 
+    '<h2>Customer Care Skills</h2>' +
+    '<button onclick="openSATest()">🧩 Test</button>' +
     '<button onclick="showPasswordInputSA(1)">📘 Quiz 1: Customer Delight</button>' +
     '<button onclick="showPasswordInputSA(2)">📘 Quiz 2: SA Roles & Responsibilities</button>' +
     '<button onclick="showPasswordInputSA(3)">📘 Quiz 3: Customer Satisfaction</button>' +
@@ -454,7 +383,6 @@ function checkPasswordSA() {
   if (selectedSubQuiz === 3) correct = '9';
   if (selectedSubQuiz === 4) correct = '0';
   if (selectedSubQuiz === 5) correct = '3690';
-
   if (enteredPassword === correct) {
     showSAQuizForm(selectedSubQuiz);
   } else {
@@ -469,7 +397,6 @@ function showSAQuizForm(num) {
   if (num === 3) url = "https://docs.google.com/forms/d/e/1FAIpQLSdxKLyTPZmm0ckDQNp81k8ieYlyVS_HVguQNI_dLRnjd3CkTg/viewform?usp=dialog";
   if (num === 4) url = "https://docs.google.com/forms/d/e/1FAIpQLScZy-v6lc3kElM11OpTNaka5Q9xVXitL2wsWkUbFZxwJOhKyw/viewform?usp=dialog";
   if (num === 5) url = "https://docs.google.com/forms/d/e/1FAIpQLSea7mUP3auJQsIx-I12oqxr5FBQ8ggF50xARMSE8TnC9CD_mQ/viewform?usp=dialog";
-
   document.getElementById('app').innerHTML =
     '<h2>' + (lang === 'ar' ? 'نموذج الاختبار' : 'Quiz Form') + '</h2>' +
     '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
@@ -481,7 +408,7 @@ function showVideos() {
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</h2>' +
             '<button onclick="window.open(\'https://360.articulate.com/review/content/99038e9a-83f7-44f0-a54b-d734bd6488e7/review\', \'_blank\')">' +
-            (lang === 'ar' ? ' Customer Delight ' : 'Customer Delight') + '</button>' +
+            (lang === 'ar' ? 'Customer Delight' : 'Customer Delight') + '</button>' +
             '<button onclick="openPilotTest()">' +
             (lang === 'ar' ? 'الاختبار التجريبي بعد مشاهدة الفيديو' : 'Pilot test after watching the video') + '</button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
@@ -490,7 +417,7 @@ function showVideos() {
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المقاطع التعليمية' : 'Video Lessons') + '</h2>' +
             '<p>' + (lang === 'ar' ? 'سيتم إدراج الفيديوهات هنا.' : 'Videos will be shown here.') + '</p>' +
-            '<button onclick="window.open(\'' + driveVideoLink + '\', \'_blank\')">📁 Drivepass</button>' + 
+            '<button onclick="window.open(\'' + driveVideoLink + '\', \'_blank\')">📁 Drivepass</button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
 }
@@ -500,7 +427,6 @@ function openPilotTest() {
     lang === 'ar'
       ? "https://docs.google.com/forms/d/e/1FAIpQLScnFWFTdGMQHu6vs5tUWjGjZpYC0umkAfS6cK5Uvxm4o4daEg/viewform?embedded=true"
       : "https://docs.google.com/forms/d/e/1FAIpQLSdoD_e5LYB_ctOlWk4SkxxvR6A_h5RFj5_VPHCEOCrw-xMW-Q/viewform?embedded=true";
-
   document.getElementById('app').innerHTML =
     '<h2>' + (lang === 'ar' ? 'الاختبار التجريبي' : 'Pilot Test') + '</h2>' +
     '<iframe src="' + formURL + '" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
@@ -523,15 +449,15 @@ function showContent() {
             '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
             '<p>' + (lang === 'ar' ? 'اضغط على الزر أدناه لعرض الملفات:' : 'Click the buttons below to open the files:') + '</p>' +
             '<button onclick="window.open(\'' + driveFileURL3 + '\', \'_blank\')">📘 Customer Delight L1p2</button>' +
-            '<button onclick="window.open(\'' + driveFileURL1 + '\', \'_blank\')">📄 Customer Care Skills </button>' +
-            '<button onclick="window.open(\'' + driveFileURL2 + '\', \'_blank\')">📘 Service Advisor Guid book </button>' +
+            '<button onclick="window.open(\'' + driveFileURL1 + '\', \'_blank\')">📄 Customer Care Skills</button>' +
+            '<button onclick="window.open(\'' + driveFileURL2 + '\', \'_blank\')">📘 Service Advisor Guid book</button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     } else {
         var driveFileSales = "https://drive.google.com/file/d/1BkWrCUDOTzg15LP_Jh-0JMOFRwnfDQbz/view?usp=sharing";
         document.getElementById('app').innerHTML =
             '<h2>' + (lang === 'ar' ? 'المادة التدريبية' : 'Course Material') + '</h2>' +
             '<p>' + (lang === 'ar' ? 'سيتم إدراج ملفات ومواد الدورة هنا.' : 'Training materials will be added here.') + '</p>' +
-            '<button onclick="window.open(\'' + driveFileSales + '\', \'_blank\')">📁 Drivepass</button>' + 
+            '<button onclick="window.open(\'' + driveFileSales + '\', \'_blank\')">📁 Drivepass</button>' +
             '<button class="back-btn" onclick="showCourseOptions()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
     }
 }
@@ -548,24 +474,22 @@ function showEvaluation() {
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'hidden' && inTestPage) {
         alert(lang === 'ar' ? 'لقد غادرت صفحة الاختبار. سيتم إعادتك إلى الصفحة الأولى.' : 'You have left the quiz page. You will be redirected to the first page.');
-        showQuizTypeSelection(); 
-        inTestPage = false; 
+        showQuizTypeSelection();
+        inTestPage = false;
     }
 });
 
-/* ==== قسم المبيعات والتسويق: كلمة مرور وفتح الاختبار ==== */
+/* ==== المبيعات والتسويق ==== */
 
-// شاشة اختيار اختبار واحد لقسم المبيعات والتسويق
 function showSalesMarketingQuizzes() {
   document.getElementById('app').innerHTML =
-    '<h2>' + (lang === 'ar' ? 'Yamaha audio system & Outlander differences' : 'Yamaha audio system & Outlander differences') + '</h2>' +
-    '<button onclick="showSalesMarketingPassword()">' +
-    (lang === 'ar' ? 'فتح الاختبار' : 'Open Quiz') + '</button>' +
-    '<button class="back-btn" onclick="showSAQuizzesRoot()">' +
+    '<h2>' + (lang === 'ar' ? 'الاختبارات - المبيعات والتسويق' : 'Quizzes - Sales & Marketing') + '</h2>' +
+    '<button onclick="showSalesMarketingPassword()">🎧 Yamaha audio system & Outlander differences</button>' +
+    '<button onclick="showSalesInductionPassword()">📘 Sales Induction Program</button>' +
+    '<button class="back-btn" onclick="showCourseOptions()">' +
     (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-// صفحة كلمة المرور للاختبار
 function showSalesMarketingPassword() {
   document.getElementById('app').innerHTML =
     '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور' : 'Enter Password') + '</h2>' +
@@ -574,7 +498,6 @@ function showSalesMarketingPassword() {
     '<button class="back-btn" onclick="showSalesMarketingQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
-// التحقق من كلمة المرور ثم فتح النموذج داخل iframe
 function checkSalesMarketingPass() {
   var pass = document.getElementById('salesMktPass').value.trim();
   if (pass === 'ATC') {
@@ -589,11 +512,35 @@ function openSalesMarketingQuiz() {
   document.getElementById('app').innerHTML =
     '<h2>🎧 Yamaha audio system & Outlander differences</h2>' +
     '<iframe src="' + url + '?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
-    '<button class="back-btn" onclick="showSalesMarketingQuizzes()">' +
-    (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+    '<button class="back-btn" onclick="showSalesMarketingQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+function showSalesInductionPassword() {
+  document.getElementById('app').innerHTML =
+    '<h2>' + (lang === 'ar' ? 'أدخل كلمة المرور' : 'Enter Password') + '</h2>' +
+    '<input type="password" id="salesInductionPass" placeholder="' + (lang === 'ar' ? 'كلمة المرور' : 'Password') + '" />' +
+    '<button onclick="checkSalesInductionPass()">' + (lang === 'ar' ? 'تأكيد' : 'Confirm') + '</button>' +
+    '<button class="back-btn" onclick="showSalesMarketingQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
+}
+
+function checkSalesInductionPass() {
+  var pass = document.getElementById('salesInductionPass').value.trim();
+  if (pass === 'ATC') {
+    openSalesInductionQuiz();
+  } else {
+    alert(lang === 'ar' ? 'كلمة المرور خاطئة!' : 'Incorrect password!');
+  }
+}
+
+function openSalesInductionQuiz() {
+  var url = 'https://forms.gle/arRzbRpk6LqV4jmf8';
+  document.getElementById('app').innerHTML =
+    '<h2>📘 Sales Induction Program</h2>' +
+    '<iframe src="' + url + '" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>' +
+    '<button class="back-btn" onclick="showSalesMarketingQuizzes()">' + (lang === 'ar' ? 'رجوع' : 'Back') + '</button>';
 }
 
 showQuizTypeSelection();
 </script>
-</body> 
+</body>
 </html>
